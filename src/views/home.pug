@@ -1,7 +1,30 @@
 extends nav.pug
 
 block content1
+    .mx-5.my-1.w-100#heading.home_title Contact List
     .container#contact-list    
         script(src="/home.js")
         script.
             loadContact();
+    style. 
+        #heading {
+            font-size: 2.5rem;
+            height: 100px;
+            
+        }
+        .home_title{
+            display:block;
+        }
+        .home_title::after {
+            display:block;
+            clear:both;
+            content : "";
+            left    : 0;
+            bottom  : 0;
+            align-self: left;
+            max-width:250px;
+            height  : 1px;
+            width   : 10%;  /* or 100px */
+            margin-left: 0.5%;
+            border-bottom:2px solid yellow;
+        }

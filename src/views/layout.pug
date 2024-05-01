@@ -7,57 +7,55 @@ mixin contactModal(contactDetails, submitType, id, buttonId)
                     button.close(type="button", onclick="closeContactModal()", aria-label="Close", style="border: none; background-color: black; color: white;") 
                         span(aria-hidden="true") &times;
                 .modal-body
-                    form
+                    form#addContactForm
                             fieldset.mb-4
                                 legend Basic Info
                                 .row.g-3
                                     .col-md-6
                                         label(for="first_name" class="form-label") First Name:
-                                        input(type="text" name="first_name" required class="form-control" value=contactDetails.first_name)
+                                        input#first_name(type="text" name="first_name" required class="form-control" value=contactDetails.first_name)
                                     .col-md-6
                                         label(for="last_name" class="form-label") Last Name:
-                                        input(type="text" name="last_name" required class="form-control" value=contactDetails.last_name)
+                                        input#last_name(type="text" name="last_name" required class="form-control" value=contactDetails.last_name)
                                     .col-md-6
                                         label(for="phone" class="form-label") Phone:
-                                        input(type="text" name="phone" required class="form-control" value=contactDetails.phone)
+                                        input#phone(type="text" name="phone" required class="form-control" value=contactDetails.phone)
                                     .col-md-6
                                         label(for="email" class="form-label") Email:
-                                        input(type="email" name="email" required class="form-control" value=contactDetails.email)
+                                        input#email(type="email" name="email" required class="form-control" value=contactDetails.email)
                             fieldset.mb-4
                                 legend Address
                                 .row.g-3
                                     .col-md-6
                                         label(for="address" class="form-label")  Address:
-                                        input(type="text" name="address" required class="form-control" value=contactDetails.address)
+                                        input#address(type="text" name="address" required class="form-control" value=contactDetails.address)
                                     .col-md-6
                                         label(for="state" class="form-label") State:
-                                        input(type="text" name="state" required class="form-control" value=contactDetails.state)
+                                        input#state(type="text" name="state" required class="form-control" value=contactDetails.state)
                                     .col-md-6
                                         label(for="zip" class="form-label") Zip:
-                                        input(type="text" name="zip" required class="form-control" value=contactDetails.zip)
+                                        input#zip(type="text" name="zip" required class="form-control" value=contactDetails.zip)
                                     .col-md-6
                                         label(for="country" class="form-label") Country:
-                                        input(type="text" name="country" required class="form-control" value=contactDetails.country)
+                                        input#country(type="text" name="country" required class="form-control" value=contactDetails.country)
                             fieldset.mb-4
                                 legend Contact Preference
                                 .row.g-3
                                     .col-md-12
                                         div.form-check
-                                            input(type="checkbox" name="contact_by_phone" id="contact_by_phone" class="form-check-input" checked=contactDetails.contact_by_phone == 1)
+                                            input#contact_by_phone(type="checkbox" name="contact_by_phone" class="form-check-input" checked=contactDetails.contact_by_phone)
                                             label(for="contact_by_phone" class="form-check-label") Contact by Phone
                                         div.form-check
-                                            input(type="checkbox" name="contact_by_email" id="contact_by_email" class="form-check-input" checked=contactDetails.contact_by_email == 1)
+                                            input#contact_by_email(type="checkbox" name="contact_by_email" class="form-check-input" checked=contactDetails.contact_by_email == 1)
                                             label(for="contact_by_email" class="form-check-label") Contact by Email
                                         div.form-check
-                                            input(type="checkbox" name="contact_by_mail" id="contact_by_mail" class="form-check-input" checked=contactDetails.contact_by_mail == 1)
+                                            input#contact_by_mail(type="checkbox" name="contact_by_mail" class="form-check-input" checked=contactDetails.contact_by_mail == 1)
                                             label(for="contact_by_mail" class="form-check-label") Contact by Mail
                             .modal-footer
-                                    div
-                                        button.btn.btn-primary( onclick='submit()').buttonId=buttonId
-                                            span Submit
                                     div.mx-2
-                                        a.btn.btn-danger Cancel
-                
+                                         button.btn.btn-primary(type="button", onclick="addContactToDb()") Add
+                                    div.mx-2
+                                        a.btn.btn-danger(type="button", onclick="closeContactModal()") Cancel
 
 
 doctype html

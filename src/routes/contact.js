@@ -6,7 +6,12 @@ router.get("/", async (req, res) => {
     const contact = await req.db.getContacts();
     res.json(contact);
 });
-
+router.post("/", async (req, res) => {
+    console.log("post request");
+    console.log(req.body);
+    const id = await req.db.createContact(req.body);
+    res.status(200).send({ id: id });
+});
 // router.get("/:id/edit", logged_in, async (req, res) => {
 //   console.log(req.params.id);
 //   res.render("editContact", {

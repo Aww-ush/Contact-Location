@@ -2,11 +2,14 @@ const pug = require("pug");
 const express = require("express");
 const Database = require("./contactDB");
 const session = require("express-session");
-
+const bodyParser = require("body-parser");
 const db = new Database();
 db.initialize();
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.set("view engine", "pug");
 
 

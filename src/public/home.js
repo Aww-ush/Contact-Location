@@ -10,17 +10,15 @@ const loadContact = async () => {
   } else {
     let html = "<ul>"; 
     contacts.forEach((element) => {
-      html += `<li class="list-group-item">
+      html += `<li class="list-group-item border border-white">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-8 ">
                         <h5 class="mb-1">${element.firstName} ${
         element.lastName
       }</h5>
                         <p class="mb-1">Phone: ${element.phone}</p>
                         <p class="mb-1">Email: ${element.email}</p>
-                        <p class="mb-1">Address: ${element.street}, ${
-        element.city
-      }, ${element.state}, ${element.zip}</p>
+                        <p class="mb-1">Address: ${element.address}</p>
                     </div>
                     <div class="col-md-4">
                         <p class="mb-1">Contact By:</p>

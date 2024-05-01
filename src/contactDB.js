@@ -47,16 +47,13 @@ class ContactDB {
     }
   }
   async createContact(contact) {
+    console.log("Creating contact:");
     const id = await this.db.create("Contacts", [
       { column: "firstName", value: contact.firstName },
       { column: "lastName", value: contact.lastName },
       { column: "phone", value: contact.phone },
       { column: "email", value: contact.email },
-      { column: "street", value: contact.street },
-      { column: "city", value: contact.city },
-      { column: "state", value: contact.state },
-      { column: "zip", value: contact.zip },
-      { column: "country", value: contact.country },
+      { column: "address", value: contact.address  + " " + contact.state + " " + contact.zip + " " + contact.country},
       { column: "contact_by_email", value: contact.contact_by_email },
       { column: "contact_by_phone", value: contact.contact_by_phone },
       { column: "contact_by_mail", value: contact.contact_by_mail },
