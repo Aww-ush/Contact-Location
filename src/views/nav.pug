@@ -1,0 +1,37 @@
+extends layout.pug
+block content
+    
+    nav.navbar.navbar-expand-lg.text-light.bg-dark
+        .container.d-flex.justify-items-between
+            button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
+                span.navbar-toggler-icon
+            #navbarNav.collapse.navbar-collapse.d-flex.justify-content-between
+                div
+                    .form-inline.my-2.my-lg-0.d-flex
+                        input.form-control.mr-sm-2(type="search", placeholder="Search", aria-label="Search")
+                        button.btn.btn-outline-warning.my-2.my-sm-0(type="submit") Search            
+                div.d-flex.justify-content-center
+                    ul.navbar-nav
+                            li.nav-item
+                                a.nav-link#add-item(type="button", data-toggle="modal", data-target="#exampleModalCenter")
+                                    svg(width="16", height="16", fill="currentColor", class="bi bi-plus-circle", viewBox="0 0 16 16")
+                                        path(d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16")
+                                        path(d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4")
+                                    span.mx-2 Add More 
+
+    +contactModal({}, "Add Contact", "addContact")              
+    block content1
+    script(src="/nav.js")
+    script.
+        addContact();
+    style.
+        #add-item{
+            color : grey;
+            cursor: pointer;
+        }
+        #add-item:hover{
+            color : white;
+            text-decoration: underline;
+            cursor: hand;
+        }
+
