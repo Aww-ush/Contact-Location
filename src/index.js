@@ -26,5 +26,5 @@ app.use("/", (req, res) => {
     res.render("home", { title: "Home" });
 })
 app.listen(8080, () => { 
-    console.log("Server running on http://localhost:8080");
+    console.log("Server running on http://localhost:4000");
 })
