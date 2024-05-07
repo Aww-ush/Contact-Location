@@ -2,10 +2,65 @@ extends nav.pug
 
 block content1
     .mx-5.my-1.w-100#heading.home_title Contact List
-    .container#contact-list    
-        script(src="/home.js")
-        script.
-            loadContact();
+    
+    .modal.fade#editContactModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+            .modal-content(style="background-color: black; color: white;")
+                .modal-header.d-flex.justify-content-between
+                    h5.modal-title#modalTitle Title
+                    button.close(type="button", aria-label="Close", style="border: none; background-color: black; color: white;", onclick="closeModal()")
+                        span(aria-hidden="true")#editFormClose &times;
+                .modal-body
+                    form#editContactForm
+                            fieldset.mb-4
+                                legend Basic Info
+                                .row.g-3
+                                    .col-md-6
+                                        label(for="edit_first_name" class="form-label") First Name:
+                                        input#edit_first_name(type="text" name="edit_first_name" required class="form-control")
+                                    .col-md-6
+                                        label(for="edit_last_name" class="form-label") Last Name:
+                                        input#edit_last_name(type="text" name="edit_last_name" required class="form-control")
+                                    .col-md-6
+                                        label(for="edit_phone" class="form-label") Phone:
+                                        input#edit_phone(type="text" name="edit_phone" required class="form-control")
+                                    .col-md-6
+                                        label(for="edit_email" class="form-label") Email:
+                                        input#edit_email(type="email" name="edit_email" required class="form-control")
+                            fieldset.mb-4
+                                legend Address
+                                .row.g-3
+                                        label(for="edit_address" class="form-label")  Address:
+                                        input#edit_address(type="text" name="edit_address" required class="form-control" )
+
+                            fieldset.mb-4
+                                legend Contact Preference
+                                .row.g-3
+                                    .col-md-12
+                                        div.form-check
+                                            input#edit_contact_by_phone(type="checkbox" name="edit_contact_by_phone" class="form-check-input" )
+                                            label(for="edit_contact_by_phone" class="form-check-label") Contact by Phone
+                                        div.form-check
+                                            input#edit_contact_by_email(type="checkbox" name="edit_contact_by_email" class="form-check-input")
+                                            label(for="edit_contact_by_email" class="form-check-label") Contact by Email
+                                        div.form-check
+                                            input#edit_contact_by_mail(type="checkbox" name="edit_contact_by_mail" class="form-check-input")
+                                            label(for="edit_contact_by_mail" class="form-check-label") Contact by Mail
+                            .modal-footer
+                                    div.mx-2
+                                         button.btn.btn-primary#submitEditForm(type="button", onclick="editContactToDB()") Edit
+                                    div.mx-2
+                                        a.btn.btn-danger#cancelEditButton(type="button", onclick="closeModal()") Cancel
+    .container#contact-list 
+    .mx-5.my-1.w-100#heading.home_title Map View
+    .container
+        #map-container.h-100vh
+            #map
+                script.
+                    loadMapView() 
+                    
+    script(src="/home.js")
+       
     style. 
         #heading {
             font-size: 2.5rem;
@@ -27,4 +82,26 @@ block content1
             width   : 10%;  /* or 100px */
             margin-left: 0.5%;
             border-bottom:2px solid yellow;
+        }
+        .clickable{
+            color : grey;
+            cursor: pointer;
+        }
+        .clickable:hover{
+            color : white;
+            text-decoration: underline;
+            cursor: hand;
+        }
+        #map-container {
+            position: relative;
+            height: 500px;
+            margin-bottom: 2rem;
+            margin-top: 2rem
+        }
+        #map{
+            height: 100%;
+            position: absolute;
+            top: 0; 
+            bottom: 0; 
+            width: 100%;
         }

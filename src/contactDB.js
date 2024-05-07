@@ -20,6 +20,8 @@ class ContactDB {
         { name: "contact_by_email", type: "INTEGER" },
         { name: "contact_by_phone", type: "INTEGER" },
         { name: "contact_by_mail", type: "INTEGER" },
+        { name: "latitude", type: "REAL" },
+        { name: "longitude", type: "REAL" },
       ],
       "id"
     );
@@ -53,10 +55,12 @@ class ContactDB {
       { column: "lastName", value: contact.lastName },
       { column: "phone", value: contact.phone },
       { column: "email", value: contact.email },
-      { column: "address", value: contact.address  + " " + contact.state + " " + contact.zip + " " + contact.country},
+      {column: "address", value: contact.address},
       { column: "contact_by_email", value: contact.contact_by_email },
       { column: "contact_by_phone", value: contact.contact_by_phone },
       { column: "contact_by_mail", value: contact.contact_by_mail },
+      { column: "latitude", value: contact.latitude },
+      { column: "longitude", value: contact.longitude },
     ]);
     return id;
   }
@@ -111,12 +115,23 @@ class ContactDB {
         { column: "contact_by_email", value: contact.contact_by_email },
         { column: "contact_by_phone", value: contact.contact_by_phone },
         { column: "contact_by_mail", value: contact.contact_by_mail },
+        { column: "latitude", value: contact.latitude },
+        { column: "longitude", value: contact.longitude },
       ],
       [{ column: "id", value: contact.id }]
     );
   }
-  async deleteContact(contact) {
-    await this.db.delete("Contacts", [{ column: "id", value: contact.id }]);
+  async findContactByEmail(email) {
+    const contact = await this.db.read("Contacts", [
+      { column: "email", value: email },
+    ]);
+    if (contact.length > 0) return contact[0];
+    else {
+      return undefined;
+    }
+  }
+  async deleteContact(id) {
+    await this.db.delete("Contacts", [{ column: "id", value: id }]);
   }
   async getContacts() {
     return await this.db.read("Contacts", []);

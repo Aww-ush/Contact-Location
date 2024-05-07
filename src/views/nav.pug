@@ -8,22 +8,76 @@ block content
             #navbarNav.collapse.navbar-collapse.d-flex.justify-content-between
                 div
                     .form-inline.my-2.my-lg-0.d-flex
-                        input.form-control.mr-sm-2(type="search", placeholder="Search", aria-label="Search")
+                        input.form-control.mr-sm-2(type="search", placeholder="Search by Name", aria-label="Search")
                         button.btn.btn-outline-warning.my-2.my-sm-0(type="submit") Search            
                 div.d-flex.justify-content-center
                     ul.navbar-nav
                             li.nav-item
-                                a.nav-link#add-item(type="button", data-toggle="modal", data-target="#exampleModalCenter")
+                                a.nav-link#add-item(type="button", data-toggle="modal", data-target="#exampleModalCenter", onclick="addContact()")
                                     svg(width="16", height="16", fill="currentColor", class="bi bi-plus-circle", viewBox="0 0 16 16")
                                         path(d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16")
                                         path(d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4")
                                     span.mx-2 Add More 
 
-    +contactModal({}, "Add Contact", "addContact")              
+    .modal.fade#addContactModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+            .modal-content(style="background-color: black; color: white;")
+                .modal-header.d-flex.justify-content-between
+                    h5.modal-title#modalTitle Title
+                    button.close(type="button", aria-label="Close", style="border: none; background-color: black; color: white;", onclick="canBtn()")
+                        span(aria-hidden="true")#formClose &times;
+                .modal-body
+                    form#addContactForm
+                            fieldset.mb-4
+                                legend Basic Info
+                                .row.g-3
+                                    .col-md-6
+                                        label(for="first_name" class="form-label") First Name:
+                                        input#first_name(type="text" name="first_name" required class="form-control")
+                                    .col-md-6
+                                        label(for="last_name" class="form-label") Last Name:
+                                        input#last_name(type="text" name="last_name" required class="form-control")
+                                    .col-md-6
+                                        label(for="phone" class="form-label") Phone:
+                                        input#phone(type="text" name="phone" required class="form-control")
+                                    .col-md-6
+                                        label(for="email" class="form-label") Email:
+                                        input#email(type="email" name="email" required class="form-control")
+                            fieldset.mb-4
+                                legend Address
+                                .row.g-3
+                                    .col-md-6
+                                        label(for="address" class="form-label")  Address:
+                                        input#address(type="text" name="address" required class="form-control" )
+                                    .col-md-6
+                                        label(for="state" class="form-label") State:
+                                        input#state(type="text" name="state" required class="form-control" )
+                                    .col-md-6
+                                        label(for="zip" class="form-label") Zip:
+                                        input#zip(type="text" name="zip" required class="form-control" )
+                                    .col-md-6
+                                        label(for="country" class="form-label") Country:
+                                        input#country(type="text" name="country" required class="form-control" )
+                            fieldset.mb-4
+                                legend Contact Preference
+                                .row.g-3
+                                    .col-md-12
+                                        div.form-check
+                                            input#contact_by_phone(type="checkbox" name="contact_by_phone" class="form-check-input" )
+                                            label(for="contact_by_phone" class="form-check-label") Contact by Phone
+                                        div.form-check
+                                            input#contact_by_email(type="checkbox" name="contact_by_email" class="form-check-input")
+                                            label(for="contact_by_email" class="form-check-label") Contact by Email
+                                        div.form-check
+                                            input#contact_by_mail(type="checkbox" name="contact_by_mail" class="form-check-input")
+                                            label(for="contact_by_mail" class="form-check-label") Contact by Mail
+                            .modal-footer
+                                    div.mx-2
+                                         button.btn.btn-primary#submitForm(type="button", onclick="addContactToDB()") Add
+                                    div.mx-2
+                                        a.btn.btn-danger#cancelButton(type="button", onclick="canBtn()") Cancel             
     block content1
     script(src="/nav.js")
-    script.
-        addContact();
     style.
         #add-item{
             color : grey;
