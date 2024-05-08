@@ -152,6 +152,8 @@ function closeModal() {
 async function editContactToDB() {
   console.log("Editing contact to db");
   const modal = document.getElementById("editContactModal");
+  document.getElementById("editContactError").innerHTML = '';
+
   console.log("this is modal id", modal.dataset.id);
   try {
     const response = await axios.post(`/contacts/${modal.dataset.id}`, {
@@ -170,6 +172,12 @@ async function editContactToDB() {
         ? 1
         : 0,
     });
+    if (!response.data.success) {
+      const message = response.data.message;
+      document.getElementById("editContactError").innerHTML = message;
+      return;
+    }
+    closeModal();
   } catch (error) {
     console.error("Error editing contact:", error);
     closeModal();

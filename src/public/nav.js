@@ -22,6 +22,7 @@ function addContact() {
   backdrop.parentNode.removeChild(backdrop);
 }
 const addContactToDB = async () => {
+  document.getElementById("addContactError").innerHTML = ''; 
   const first_name = document.getElementById("first_name").value;
   const last_name = document.getElementById("last_name").value;
   const email = document.getElementById("email").value;
@@ -39,22 +40,9 @@ const addContactToDB = async () => {
   const contact_by_mail = document.getElementById("contact_by_mail").checked
     ? 1
     : 0;
-  const contact = {
-    first_name,
-    last_name,
-    email,
-    phone,
-    address,
-    state,
-    zip,
-    country,
-    contact_by_phone,
-    contact_by_email,
-    contact_by_mail,
-  };
-  console.log("this is get data form modal", contact);
+
   try {
-    await axios.post("/contacts", {
+    const response = await axios.post("/contacts", {
       firstName: first_name,
       lastName: last_name,
       email: email,
@@ -65,6 +53,11 @@ const addContactToDB = async () => {
       contact_by_email: contact_by_email,
       contact_by_mail: contact_by_mail,
     });
+    if (!response.data.success) { 
+      const message = response.data.message;
+      document.getElementById("addContactError").innerHTML = message; 
+      return;
+    }
     canBtn();
   } catch (error) {
     console.error("Error adding contact:", error);

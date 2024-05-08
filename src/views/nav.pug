@@ -68,6 +68,8 @@ block content
                                         div.form-check
                                             input#contact_by_mail(type="checkbox" name="contact_by_mail" class="form-check-input")
                                             label(for="contact_by_mail" class="form-check-label") Contact by Mail
+                            br
+                            h3#addContactError.text-danger
                             .modal-footer
                                     div.mx-2
                                          button.btn.btn-primary#submitForm(type="button", onclick="addContactToDB()") Add

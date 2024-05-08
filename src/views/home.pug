@@ -45,6 +45,8 @@ block content1
                                         div.form-check
                                             input#edit_contact_by_mail(type="checkbox" name="edit_contact_by_mail" class="form-check-input")
                                             label(for="edit_contact_by_mail" class="form-check-label") Contact by Mail
+                            br
+                            h3#editContactError.text-danger
                             .modal-footer
                                     div.mx-2
                                          button.btn.btn-primary#submitEditForm(type="button", onclick="editContactToDB()") Edit
