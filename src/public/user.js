@@ -71,7 +71,6 @@ const login = async (req, res) => {
       closeLoginModal();
       await loadContact();
     } else {
-        closeLoginModal();
       console.log("Error logging in:", res.data.message);
       loginHtml.innerHTML = res.data.message;
     }
