@@ -2,12 +2,11 @@ extends nav.pug
 
 block content1
     .mx-5.my-1.w-100#heading.home_title Contact List
-    
     .modal.fade#editContactModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
         .modal-dialog(role="document")
             .modal-content(style="background-color: black; color: white;")
                 .modal-header.d-flex.justify-content-between
-                    h5.modal-title#modalTitle Title
+                    h5.modal-title#modalTitle Add Contact
                     button.close(type="button", aria-label="Close", style="border: none; background-color: black; color: white;", onclick="closeModal()")
                         span(aria-hidden="true")#editFormClose &times;
                 .modal-body
@@ -58,9 +57,115 @@ block content1
             #map
                 script.
                     loadMapView() 
-                    
+    // login
+    .modal.fade#loginModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+            .modal-content(style="background-color: black; color: white;")
+                .modal-header.d-flex.justify-content-between
+                    h5.modal-title#modalTitle.home_title Login in
+                    button.close(type="button", aria-label="Close", style="border: none; background-color: black; color: white;", onclick="closeLoginModal()")
+                        span(aria-hidden="true")#editFormClose &times;
+                .modal-body
+                    p.mt-3
+                            span Don`t have an account? 
+                            .clickable(onclick="clickFromLoginToSignUp()") Sign up here!
+                    br
+                    form#loginForm
+                            fieldset.mb-4
+                                legend Basic Info
+                                .row.g-3
+                                    .col-md-6
+                                        label(for="login_user_name" class="form-label") User name:
+                                        input#login_user_name(type="text" name="login_user_name" required class="form-control")
+                                .row.g-3
+                                    .col-md-6
+                                        label(for="login_password" class="form-label") Passowrd:
+                                        input#login_password(type="password" name="login_password" required class="form-control")
+                                h3#loginError.text-danger
+                            .modal-footer
+                                    div.mx-2
+                                         button.btn.btn-primary#submitEditForm(type="button", onclick="login()") Login
+                                    div.mx-2
+                                        a.btn.btn-danger#cancelEditButton(type="button", onclick="closeLoginModal()") Cancel
+    // signin      
+    .modal.fade#signUpModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+            .modal-content(style="background-color: black; color: white;")
+                .modal-header.d-flex.justify-content-between
+                    h5.modal-title#modalTitle.home_title Sing in
+                    button.close(type="button", aria-label="Close", style="border: none; background-color: black; color: white;", onclick="closeSignUpModal()")
+                        span(aria-hidden="true")#editFormClose &times;
+                .modal-body
+                    p.mt-3
+                            span Already have an account? 
+                            a(onClick="clickFromSignUpToLogin()") Sign in here!
+                    br
+                    form#signUpForm
+                            fieldset.mb-4
+                                legend Basic Info
+                                .row.g-3
+                                    .col-md-6
+                                        label(for="signUp_first_name" class="form-label") First Name:
+                                        input#signUp_first_name(type="text" name="signUp_first_name" required class="form-control")
+                                    .col-md-6
+                                        label(for="signUp_last_name" class="form-label") Last Name:
+                                        input#signUp_last_name(type="text" name="signUp_last_name" required class="form-control")
+                                    .col-md-6
+                                        label(for="signUp_user_name" class="form-label") User Name:
+                                        input#signUp_user_name(type="text" name="signUp_user_name" required class="form-control")
+                                    .col-md-6
+                                        label(for="signUp_email" class="form-label") Email:
+                                        input#signUp_email(type="email" name="signUp_email" required class="form-control")
+                            fieldset.mb-4
+                                legend Password
+                                .row.g-3
+                                    .col-md-6
+                                        label(for="signUp_password" class="form-label")  Password:
+                                        input#signUp_password(type="password" name="signUp_password" required class="form-control" )
+                                .row.g-3
+                                    .col-md-6
+                                        label(for="signUp_password2" class="form-label") Confirm Password:
+                                        input#signUp_password2(type="password" name="signUp_password2" required class="form-control" )
+                                h3#signUpError.text-danger
+                            .modal-footer
+                                    div.mx-2
+                                         button.btn.btn-primary#submitSignUpForm(type="button", onclick="signup()") SignUp
+                                    div.mx-2
+                                        a.btn.btn-danger#cancelEditButton(type="button", onclick="closeSignUpModal()") Cancel      
+    // signin      
+    .modal.fade#signInInfoModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+            .modal-content(style="background-color: black; color: white;")
+                .modal-header.d-flex.justify-content-between
+                    h5.modal-title#modalTitle.home_title Sing in
+                    button.close(type="button", aria-label="Close", style="border: none; background-color: black; color: white;", onclick="closeSignInInfoModal()")
+                        span(aria-hidden="true")#editFormClose &times;
+                .modal-body
+                    p.mt-3
+                            span Please Sign in to perform this action
+                            .modal-footer
+                                    div.mx-2
+                                        a.btn.btn-danger#closeSignInInfoModal(type="button", onclick="closeSignInInfoModal()") Cancel
+    // delete
+    .modal.fade#deleteModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+            .modal-content(style="background-color: black; color: white;")
+                .modal-header.d-flex.justify-content-between
+                    h5.modal-title#modalTitle.home_title Delete
+                    button.close(type="button", aria-label="Close", style="border: none; background-color: black; color: white;", onclick="closeDeleteModal()")
+                        span(aria-hidden="true")#editFormClose &times;
+                .modal-body
+                    p.mt-3
+                            span Are you sure you want to delete this contact?
+                            .modal-footer
+                                    div.mx-2
+                                         button.btn.btn-primary#submitEditForm(type="button", onclick="deleteContact()") Delete
+                                    div.mx-2
+                                        a.btn.btn-danger#cancelEditButton(type="button", onclick="closeDeleteModal()") Cancel
     script(src="/home.js")
-       
+    script(src="/user.js")
+    script. 
+         manageSession();
     style. 
         #heading {
             font-size: 2.5rem;

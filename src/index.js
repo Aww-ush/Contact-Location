@@ -20,11 +20,31 @@ app.use((req, res, next) => {
   next(); // ensures the route handlers will be called.
 });
 
+app.use(
+  session({
+    secret: "cmps369",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, 
+  })
+);
+app.use((req, res, next) => {
+  if (req.session.user) {
+    res.locals.user = {
+      id: req.session.user.id,
+      firstName: req.session.user.firstName,
+      lastName: req.session.user.lastName,
+      userName: req.session.user.userName,
+    };
+  }
+  next();
+});
 
-app.use("/contacts", require("./routes/contact")); // Route for logging in
+app.use("/users", require("./routes/user")); // Route for logging in
+app.use("/contacts", require("./routes/contact")); // Route for contacts
 app.use("/", (req, res) => {
     res.render("home", { title: "Home" });
 })
 app.listen(8080, () => { 
-    console.log("Server running on http://localhost:4000");
+    console.log("Server running on http://localhost:8080");
 })
